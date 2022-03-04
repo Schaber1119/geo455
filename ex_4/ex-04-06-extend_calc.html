@@ -4,11 +4,12 @@
         <title>Working with user input</title>
     </head>
     <body>
-        <p>First number: <input type="number" id="num1" min="0" max="100" value=""></p>
-        <p>Second number: <input type="number" id="num2" min="0" max="100" value=""></p>
+        <p>First number: <input type="number" id="num1" min="0" max="" value=""></p>
+        <p>Second number: <input type="number" id="num2" min="0" max="" value=""></p>
         
         <input type="button" id="multiply" value="Multiply!">
         <input type="button" id="divide" value="Divide!">
+        <input type="button" id="percent" value="Percentage!">
         <input type="button" id="clear" value="Clear History!">
         <!-- add more math functions --->
         <p id="result"></p>
@@ -25,6 +26,10 @@
             document.getElementById("divide").addEventListener("click", function() {
                 result.innerHTML +="<p>" + num1.value + " / " + num2.value + 
                     " = " + num1.value / num2.value + "</p>";});
+            
+            document.getElementById("percent").addEventListener("click", function() {
+                result.innerHTML +="<p>" + num1.value + " / " +num2.value +  " * 100" + 
+                    " = " + num1.value / num2.value * 100 + "%" + "</p>";});
             
             document.getElementById("clear").addEventListener("click", function() {
                 result.innerHTML ="";});
