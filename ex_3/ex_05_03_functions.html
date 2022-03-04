@@ -5,6 +5,7 @@
     <h2>JavaScript Functions</h2>
 
     <p id="multiply"></p>
+    <p id="squareroot"></p>
     <p id="greet"></p>
     <p id="f2c"></p>
     <p id="method"></p>
@@ -13,8 +14,7 @@
     <p id="len2"></p>
     <p id="pop_method"></p>
     <p id="push_method"></p>
-
-
+   
 
     <script>
         
@@ -22,12 +22,14 @@
             return p1 * p2;
         };
         
-        document.getElementById("multiply").innerHTML = "This is result of multiply function: "+ multiply(512, 256);
+        document.getElementById("multiply").innerHTML = "This is result of multiply function: "+ multiply(112, 206);
         // change the parameters and check ..
         
         // create a function to return square root of a number ..
         
 
+        
+       document.getElementById("squareroot").innerHTML = "This is the result of a square root function: " + Math.sqrt(9);
         
         function greeting() {
             return ("Hello!");
