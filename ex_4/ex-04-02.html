@@ -5,21 +5,21 @@
     </head>
     <body>
         <h2>Earth Poles Viewer</h2>
-        <img id="myImage" src="images/north.svg"><br>
+        <img id="myImage" src="north.svg"><br>
         <input type="button" value="North Pole" id="north">
         <input type="button" value="South Pole" id="south">
+        <input type="button" value="Picture" id="pic">
         <script>
             function showNorth() {
                 document
                     .getElementById("myImage")
-                    .src = "images/north.svg";
+                    .src = "north.svg";
             }
             function showSouth() {
                 document
                     .getElementById("myImage")
-                    .src = "images/south.svg";
+                    .src = "south.svg";
             }
-            
             document
                 .getElementById("north")
                 .addEventListener("click", showNorth);
@@ -27,7 +27,15 @@
             document
                 .getElementById("south")
                 .addEventListener("click", showSouth);
+            
+            document
+            .getElementById("pic")
+            .addEventListener("click")
+            .innerHTML = 
+            "Ha you thought it was gonna be a picture";
+        
         </script>
     </body>
 </html>
+
 
