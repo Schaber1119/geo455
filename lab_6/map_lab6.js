@@ -186,7 +186,7 @@ var legend = L.control({position: 'bottomright'}); // Try the other three corner
     legend.onAdd = function (mymap) {
 
         var div = L.DomUtil.create('div', 'legend'),
-            grades_2 = [1, 2, 4, 7, 13]; // The break values to define the intervals of population, note we begin from 0 here
+            grades_2 = [0, 2, 4, 7, 13]; // The break values to define the intervals of population, note we begin from 0 here
 
         div.innerHTML = '<b>Language Density <br></b>'; // The legend title (HTML-based), in this case it's Population Density 2011
 
