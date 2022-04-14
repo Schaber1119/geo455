@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <title>geo455_lab9</title>
-        
-        
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-        
+       <title>geo455_lab4</title>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-        
-        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <script src="https://lycheelin.github.io/leaflet.migrationLayer/src/src.js"></script>
         <script src="dane_data.js"></script>
         <style>
@@ -21,37 +16,52 @@
                 margin-right: auto;
                 margin-bottom: auto;
                 margin-left: auto;}
-           #header{
-               background-color: black;
-               padding: 5px;
-               font-family: "Roboto Serif", Helvetica, Corbel, Arial, sans-serif;
-               text-align: center;
-               color: aliceblue;
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: "whitesmoke";
+                font-family: "Noto Sans", sans-serif;
+                color: #3d3d3d;
             }
-        
-             #container #map{
-               height: 850px;
-               position: relative;
-           }
-            #container #leftmenu{
-                position: static;
-                width: 220px;
+            #title {
+                position: fixed;
+                margin-top: 0;
                 top: 10px;
                 left: 50px;
-                padding: 10px 15px;
-                float: left;
-                height: 830px;
-                margin: 0;
-                font-size: 1em;
+                font-size: 2em;
                 font-family: "Lora", serif;
                 letter-spacing: .04em;
-                background-color: #9ebcda;
+                padding: 10px 15px;
+                background-color: rgba(255, 255, 255, 0.5);
                 border: 1px solid grey;
                 border-radius: 3px;
-               
-           }
-             .button {
-               background-color: #008CBA; /* Green */
+                z-index: 800;
+            }
+            #description h2 {
+                font-family: "Lora", serif;
+                letter-spacing: .04em;
+            }
+            #map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+            }
+    
+            #description {
+                position: fixed;
+                bottom: 20px;
+                left: 10px;
+                width: 400px;
+                padding: 0px 10px;
+                background-color: rgba(255, 255, 255, 0.7);
+                border: 1px solid grey;
+                border-radius: 3px;
+                z-index: 800;
+            }
+            
+            .btn {
+               background-color: mediumpurple; 
                border: 1px solid white;
                color: white;
                text-align: center;
@@ -62,23 +72,17 @@
                display: block;
                width: 200px;
                height: 50px;
+                
            }
-            
-        
-            #description {
-                position: fixed;
-                bottom: 20px;
-                left: 10px;
-                top: 80px;
-                width: 280px;
-                padding: 0px 15px;
-                background-color: #EEEEEE;
-                border: 1px solid grey;
-                border-radius: 3px;
-                z-index: 800;
-            }
+             #event{
+                 position: absolute;
+                 bottom: 120px;
+                 right: -180px;
+                 height: 100px;
+                 width: 400px;
+                z-index: 10000;
+    }
            
-            
             #splasher1{
                background-color: white;
                padding: 2px;
@@ -101,34 +105,25 @@
                top: 315px;
                display: block;
            }
-            html {
-                background-color: mediumpurple;
-            }
+            
         </style>
     </head>
     <body>
-        <div id ="container">
-        <div id="header"><h1>Lab 8: jQuery and ESRI Leaflet</h1></div>
-        <div id="leftmenu">
-        <button id="btn1" class="button" onclick="pause()">Show Legend</button>
-        <button id="btn2" class="button" onclick="hide()">Hide Legend</button>
-        <button id="btn3" class="button" onclick="show()">Show About Map</button>
-        <button id="btn4" class="button" onclick="play()">Hide About Map</button>
+        <h1 id="title">Lab 9: Flowmap Of Commuters Into Dane County</h1>
+        <div id="map"></div>
         
+        <div id="event">
+        <input type="button" value="Hide" class="btn" onclick="hide()">
+        <input type="button" value="Show" class="btn" onclick="show()">
+        <input type="button" value="Pause" class="btn" onclick="pause()">
+        <input type="button" value="Play" class="btn" onclick="play()">
+           </div>
+        
+        <div id="description">
+            <h2>About this assignment</h2>
+            <p><p>This is a flow map depicting daily commuters to Dane County from 26 counties in Southern Wisconsin and Northern Illinois. The thicker and darker the lines, the larger the number of commuters is. </p>
+           <p>Map authored by Sean Schaber</p>
         </div>
-        <div id= "splasher1" class="hidden">
-</div>
-<div id= "splasher2" class="hidden">
-    <h3>About the map</h3>
-    <p>The data shows wildfire risk by USGS and location of populated cities. 
-    Click on the city markers to check their names. 
-    ESRI leaflet was used to display the datalayers.</p>
- </div>
-        
-        <div id="map">
         <script src="map_lab9.js"></script>
-            </div>
-    </div>
-        
     </body>
 </html>
