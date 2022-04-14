@@ -1,7 +1,8 @@
   
+  
 var mymap = L.map('map', {
-    center: [38, -96],
-              zoom: 5,
+    center: [43, -89],
+              zoom: 8,
           });
 
 var grayscale = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
@@ -24,9 +25,8 @@ var grayscale = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/
         );
         migrationLayer.addTo(mymap);
 
-        function setData(){
-            migrationLayer.setData(data2);
-        }
+        
+        
         function hide(){
             migrationLayer.hide();
         }
@@ -39,6 +39,4 @@ var grayscale = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/
         function pause(){
             migrationLayer.pause();
         }
-        function destroy() {
-            migrationLayer.destroy();
-        }
+    
