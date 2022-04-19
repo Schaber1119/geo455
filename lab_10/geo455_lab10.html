@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Great Circle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- Load Leaflet from CDN -->
+       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+       <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+       
+    <!-- Load TurfJS from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+    
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+         #title {
+                position: fixed;
+                margin-top: 0;
+                top: 10px;
+                left: 50px;
+                font-size: 2em;
+                font-family: "Lora", serif;
+                letter-spacing: .04em;
+                padding: 10px 15px;
+                background-color: mediumpurple;
+                border: 1px solid grey;
+                border-radius: 3px;
+                z-index: 800;
+            }
+        #description {
+                position: fixed;
+                bottom: 20px;
+                left: 10px;
+                width: 400px;
+                padding: 0px 10px;
+                background-color: rgba(255, 255, 255, 0.7);
+                border: 1px solid grey;
+                border-radius: 3px;
+                z-index: 800;
+            }
+        #description h2 {
+                font-family: "Lora", serif;
+                letter-spacing: .04em;
+            }
+    </style>
+</head>
+<body>
+    
+    <div id='title'>Lab 7: Mapping Expeditions and Fatalities in the Himalayas (1950-2003)</div>
+    
+    <div id='description'><h2>About this assignment</h2>Lab 7: Mapping Expeditions and Fatalities in the Himalayas (1950-2003)</div>
+    
+    <div id="map"></div>
+    <script>
+    
+
+    
+// Initialize map
+var mymap = L.map("map").setView([45, -60], 3);
+        
+L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+    {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}
+).addTo(mymap);
+  
+var point_layer = L.layerGroup().addTo(mymap);
+var great_layer = L.layerGroup().addTo(mymap);
+var midpoint_layer =L.layerGroup().addTo(mymap);
+
+var marker1 = L.marker([43.8138, -91.2519], {draggable: true}).addEventListener("drag", greatCircle).addTo(point_layer);
+var marker2 = L.marker([53.9614, -1.0739], {draggable: true}).addEventListener("drag", greatCircle).addTo(point_layer);
+
+function greatCircle() {
+    great_layer.clearLayers();
+    points = point_layer.toGeoJSON();
+    var circle = turf.greatCircle(points.features[0], points.features[1]);
+    L.geoJSON(circle).addTo(great_layer);
+    
+    midpoint_layer.clearLayers();
+    var midpoint = turf.midpoint(points.features[0], points.features[1]);  
+    L.geoJSON(midpoint).addTo(midpoint_layer);
+    }
+greatCircle();
+        
+    </script>
+</body>
+</html>
