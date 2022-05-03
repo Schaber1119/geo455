@@ -36,14 +36,14 @@ L.easyButton(('<img src="globe_icon.png", height= 20px >'), function (btn, map) 
 }).addTo(mymap);
 
 var myIcon1 = L.icon({
-    iconUrl: 'minor.png',
+    iconUrl: 'images/minor.png',
     iconSize: [15, 15],
     iconAnchor: [10, 10],
     popupAnchor: [-2, -10],
 });
 
 var myIcon2 = L.icon({
-    iconUrl: 'major.png',
+    iconUrl: 'images/major.png',
     iconSize: [15, 15],
     iconAnchor: [10, 10],
     popupAnchor: [-2, -10],
@@ -113,11 +113,11 @@ mymap.addControl(searchControl);
 //~~~~~~~~~~~~~~~~~~~~~~~~~Overlay~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 var overlayMaps = {
-    "<img src='roads.png' height=16> Roman Road Network": roads,
-    "<img src='rivers.png' height=16> Rivers in the Roman Empire": rivers,
-    "<img src='empire.png' height=16> Roman Empire 117 AD": empire,
-    "<img src='minor.png' height=16> Minor Roman Cities": minor,
-    "<img src='major.png' height=16> Major Roman Cities": major,
+    "<img src='images/roads.png' height=16> Roman Road Network": roads,
+    "<img src='images/rivers.png' height=16> Rivers in the Roman Empire": rivers,
+    "<img src='images/empire.png' height=16> Roman Empire 117 AD": empire,
+    "<img src='images/minor.png' height=16> Minor Roman Cities": minor,
+    "<img src='images/major.png' height=16> Major Roman Cities": major,
 };
 
 
