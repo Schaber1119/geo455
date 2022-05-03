@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
         <link rel="stylesheet" href="https://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.css" />
 <script src="https://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
         <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-minimap/v1.0.0/Control.MiniMap.js'></script>
         <script src="sites_clip.js"></script>
         <script src="strabor.js"></script>
@@ -37,7 +38,7 @@
                 font-family: "Lora", serif;
                 letter-spacing: .04em;
                 padding: 10px 15px;
-                background-color: mediumpurple;
+                background-color: rgba(255, 255, 255, 0.7);
                 border: 1px solid grey;
                 border-radius: 3px;
                 z-index: 800;
@@ -52,11 +53,6 @@
                 bottom: 0;
                 width: 100%;
             }
-            .custom .leaflet-popup-tip,
-            .custom .leaflet-popup-content-wrapper {
-                background: #000000;
-                color: #ffffff
-            }
             #description {
                 position: fixed;
                 bottom: 20px;
@@ -68,16 +64,6 @@
                 border-radius: 3px;
                 z-index: 800;
             }
-             p {
-                font-family: 'Catamaran'; 
-                font: sans-serif;  
-                font-size: 1.25em;
-                
-            }
-            #description a {
-                color: #005daa;
-                text-decoration: none;
-            }
             #description a:hover {
                 text-decoration: underline;
             }
@@ -86,6 +72,11 @@
     <body>
        <div id='title'>Rivers and Roads: Network of the Roman Empire</div>
         <div id='map'></div>
+        <div id="description">
+            <h2></h2>
+            <p><p>This map displays the river and road network of the Roman Empire at its greatest extent under Trajan in 117 AD. They are overlayed Barrington Atlas's rank one (major) and two (minor) cities of the Empire. The rivers are those mentioned by Ancient Greek geographer Strabo (who lived during the early Roman Empire) clipped to the area immediately surrounding the Roman Empire. </p>
+           <p>Map authored by Sean Schaber</p>
+        </div>
             <script src="map_final.js"></script>
     </body>
 </html>
