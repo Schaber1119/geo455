@@ -12,6 +12,10 @@ var streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
     })
 streets.addTo(mymap);
 
+var topo = L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+    layers: 'SRTM30-Colored-Hillshade'
+});
+
 var grayscale = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2NoYXVkaHVyaSIsImEiOiJjazBtcG5odG8wMDltM2JtcjdnYTgyanBnIn0.qwqjMomdrBMG36GQKXBlMw', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -20,6 +24,16 @@ var grayscale = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}
     tileSize: 512,
     zoomOffset: -1
     }).addTo(mymap);
+
+var baseLayers = {
+    'Grayscale': grayscale,
+    'Streets': streets,
+    "Hillshade": topo,
+	};
+
+L.easyButton(('<img src="globe_icon.png", height= 20px >'), function (btn, map) {
+    map.setView([42, 22], 5);
+}).addTo(mymap);
 
 var myIcon1 = L.icon({
     iconUrl: 'minor.png',
@@ -35,10 +49,7 @@ var myIcon2 = L.icon({
     popupAnchor: [-2, -10],
 });
 
-
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~Roads~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 var roads = L.geoJSON(roads, {color: "red"}).addTo(mymap);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~Rivers~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,6 +92,24 @@ var miniMap = new L.Control.MiniMap(L.tileLayer('https://api.maptiler.com/maps/t
 
 L.control.scale({position: 'bottomright', maxWidth: '150', metric: 'True'}).addTo(mymap);
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~Search~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+var searchControl = new L.Control.Search({
+    position:'topright',
+    layer: minor,
+    propertyName: 'Modern_Toponym',
+    marker: false,
+    markeranimate: true,
+    delayType: 50,
+    collapsed: false,
+    textPlaceholder: 'Search by modern city name: e.g. Rome, Lyon',   
+    moveToLocation: function(latlng, title, map) {
+        mymap.setView(latlng, 15);}
+});
+
+mymap.addControl(searchControl); 
+
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~Overlay~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 var overlayMaps = {
@@ -90,4 +119,6 @@ var overlayMaps = {
     "<img src='minor.png' height=16> Minor Roman Cities": minor,
     "<img src='major.png' height=16> Major Roman Cities": major,
 };
-var legend = L.control.layers({}, overlayMaps, {collapsed: false}).addTo(mymap);
+
+
+var layerControl = L.control.layers(baseLayers, overlayMaps, {collapsed: true}).addTo(mymap);
